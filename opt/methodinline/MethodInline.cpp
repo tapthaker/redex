@@ -164,13 +164,13 @@ std::unordered_set<DexMethod*> MethodInlinePass::gather_non_virtual_methods(
 void MethodInlinePass::populate_blacklist(const Scope& scope) {
   walk::classes(scope, [this](const DexClass* cls) {
     for (const auto& type_s : m_black_list) {
-      if (boost::starts_with(cls->get_name()->c_str(), type_s)) {
+      if (boost::starts_with(show_deobfuscated(cls).c_str(), type_s)) {
         m_inliner_config.black_list.emplace(cls->get_type());
         break;
       }
     }
     for (const auto& type_s : m_caller_black_list) {
-      if (boost::starts_with(cls->get_name()->c_str(), type_s)) {
+      if (boost::starts_with(show_deobfuscated(cls).c_str(), type_s)) {
         m_inliner_config.caller_black_list.emplace(cls->get_type());
         break;
       }
