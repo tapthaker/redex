@@ -13,6 +13,8 @@ import sys
 import tempfile
 
 from os.path import join
+from os import getenv
+
 
 temp_dirs = []
 
@@ -43,9 +45,14 @@ def remove_temp_dirs():
 
 def sign_apk(keystore, keypass, keyalias, apk):
     try:
+        java_home = getenv('JAVA_HOME')
+        if java_home:
+            jarsigner_binary = join(java_home, 'bin','jarsigner')
+        else:
+            jarsigner_binary = 'jarsigner'
         subprocess.check_call(
             [
-                'jarsigner', '-sigalg', 'SHA1withRSA', '-digestalg', 'SHA1',
+                jarsigner_binary, '-sigalg', 'SHA1withRSA', '-digestalg', 'SHA1',
                 '-keystore', keystore, '-storepass', keypass, apk, keyalias
             ],
             stdout=sys.stderr
