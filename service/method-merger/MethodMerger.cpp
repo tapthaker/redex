@@ -178,11 +178,11 @@ Stats merge_methods(const MethodGroups& method_groups,
           new_callee.additional_args.get()[0], SHOW(new_callee.method));
   }
   if (traceEnabled(METH_MERGER, 3)) {
-    trace(METH_MERGER, 3, "merged static methods : %u\n",
+    TRACE(METH_MERGER, 3, "merged static methods : %u\n",
           stats.num_merged_static_methods);
-    trace(METH_MERGER, 3, "merged direct methods : %u\n",
+    TRACE(METH_MERGER, 3, "merged direct methods : %u\n",
           stats.num_merged_direct_methods);
-    trace(METH_MERGER, 3, "merged virtual methods : %u\n",
+    TRACE(METH_MERGER, 3, "merged virtual methods : %u\n",
           stats.num_merged_nonvirt_methods);
   }
   return stats;
